@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/pelicardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.example.alexey.quever.UrlImageView
+            android:id="@+id/peli_image"
+            android:layout_width="220px"
+            android:layout_height="302px" />
+
+        <TextView
+            android:id="@+id/tvTitol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/peli_image"
+            android:text="Titol"
+            android:layout_margin="5dp"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tvGenere"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="genero"
+            android:layout_margin="5dp"
+            android:layout_toEndOf="@id/peli_image"
+            android:layout_below="@id/tvTitol"/>
+
+        <TextView
+            android:id="@+id/tvDirector"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Director"
+            android:layout_margin="5dp"
+            android:layout_toEndOf="@id/peli_image"
+            android:layout_below="@id/tvGenere"/>
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

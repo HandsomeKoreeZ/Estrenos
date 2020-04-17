@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Sesion_cards">
+
+    <!-- TODO: Update blank fragment layout -->
+    <android.support.v7.widget.CardView
+        android:id="@+id/pelicardView_s"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.example.alexey.quever.UrlImageView
+                android:id="@+id/peli_image_s"
+                android:layout_width="220px"
+                android:layout_height="302px" />
+
+            <TextView
+                android:id="@+id/tvTitol_s"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/peli_image_s"
+                android:text="Titol"
+                android:layout_margin="5dp"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tvGenere_s"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="genero"
+                android:layout_margin="5dp"
+                android:layout_toEndOf="@id/peli_image_s"
+                android:layout_below="@id/tvTitol_s"/>
+
+            <TextView
+                android:id="@+id/tvDirector_s"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Director"
+                android:layout_margin="5dp"
+                android:layout_toEndOf="@id/peli_image_s"
+                android:layout_below="@id/tvGenere_s"/>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:id="@+id/rv_s"
+        android:layout_below="@id/pelicardView_s"
+        />
+</RelativeLayout>
