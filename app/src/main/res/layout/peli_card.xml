@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.example.alexey.quever.UrlImageView
+        <com.example.alexey.quever.service.UrlImageView
             android:id="@+id/peli_image"
             android:layout_width="220px"
             android:layout_height="302px" />

@@ -1,4 +1,4 @@
-package com.example.alexey.quever;
+package com.example.alexey.quever.Entities;
 
 public class Sesion {
     private Cine cine;
@@ -6,7 +6,7 @@ public class Sesion {
 
     Sesion(){};
 
-    Sesion (Cine c, Data d){
+    public Sesion(Cine c, Data d){
         this.cine = c;
         this.dat = d;
     }

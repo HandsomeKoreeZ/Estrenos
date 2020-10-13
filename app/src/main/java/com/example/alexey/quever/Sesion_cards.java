@@ -14,9 +14,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
+import com.example.alexey.quever.Entities.Peli;
+import com.example.alexey.quever.Entities.Sesion;
+import com.example.alexey.quever.database.DBCines;
+import com.example.alexey.quever.service.DBService;
+import com.example.alexey.quever.service.UrlImageView;
 
-import java.lang.reflect.Array;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -28,8 +31,7 @@ public class Sesion_cards extends Fragment {
     RecyclerView rv;
     RecyclerView.Adapter adapter;
     LinearLayoutManager llm;
-    DBCines base;
-    MainActivity ma;
+    DBService base;
 
     public Sesion_cards() {
         // Required empty public constructor
@@ -46,7 +48,6 @@ public class Sesion_cards extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ma = (MainActivity) getActivity();
         if (getArguments() != null) {
             peli = (Peli) getArguments().getSerializable(Argument);
         }
@@ -73,8 +74,8 @@ public class Sesion_cards extends Fragment {
         director.setText(peli.getDirector());
 
         //base
-        base = new DBCines(context);
-        ArrayList<Sesion> listSes = base.getSesList(peli.getTitol());
+        base = DBService.getInstance();
+        ArrayList<Sesion> listSes = base.getSessionsList(peli.getTitol());
 
         //controladores
         rv = (RecyclerView) vista.findViewById(R.id.rv_s);

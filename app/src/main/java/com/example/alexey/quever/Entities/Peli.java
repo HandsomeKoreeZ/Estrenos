@@ -1,4 +1,4 @@
-package com.example.alexey.quever;
+package com.example.alexey.quever.Entities;
 
 import java.io.Serializable;
 

@@ -1,13 +1,16 @@
-package com.example.alexey.quever;
+package com.example.alexey.quever.database;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import java.lang.reflect.Array;
+import com.example.alexey.quever.Entities.Cine;
+import com.example.alexey.quever.Entities.Data;
+import com.example.alexey.quever.Entities.Peli;
+import com.example.alexey.quever.Entities.Sesion;
+
 import java.util.ArrayList;
 
 /**
@@ -104,13 +107,13 @@ public class DBCines extends SQLiteOpenHelper {
 
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
-    public void addDate(String titol, String address, String date, String times){
+    public void addDate(Data date){
         SQLiteDatabase bb = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
-        cv.put("addressCine",address);
-        cv.put("titolPeli",titol);
-        cv.put("date",date);
-        cv.put("times",times);
+        cv.put("addressCine",date.getAddressCine());
+        cv.put("titolPeli",date.getTitolPeli());
+        cv.put("date",date.getDat());
+        cv.put("times",date.getTimes());
         bb.insert(tableDates,null,cv);
     }
 

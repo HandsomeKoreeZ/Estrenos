@@ -11,8 +11,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.alexey.quever.Entities.Cine;
+import com.example.alexey.quever.Entities.Peli;
+import com.example.alexey.quever.service.*;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -20,7 +23,6 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -29,7 +31,7 @@ public class Peli_cards extends Fragment {
     RecyclerView rv;
     RecyclerView.Adapter adapter;
     LinearLayoutManager llm;
-    DBCines base;
+    DBService base;
     MainActivity ma;
 
     public Peli_cards() {
@@ -48,8 +50,8 @@ public class Peli_cards extends Fragment {
         Context context = getContext();
 
         //base
-        base = new DBCines(context);
-        ArrayList<Peli> listPeli = base.getListPelis();
+        base = DBService.getInstance();
+        ArrayList<Peli> listPeli = base.getMoviesList();
 
         //controladores
         rv = (RecyclerView) vista.findViewById(R.id.rv);
@@ -96,9 +98,9 @@ public class Peli_cards extends Fragment {
                 @Override
                 public void onClick(View v) {
                     //parse data only if the database empty
-                    if(base.getSesList(item.getTitol()).size()>0){
-                        ma.mostrarSesiones(item);
-                    } else new getSesiones().execute(item);
+                    if(base.getSessionsList(item.getTitol()).size()>0){
+                        fragmentHelper.mostrarSesiones(item);
+                    } else base.updateSessionsOf(item);
                 }
             });
         }
@@ -128,57 +130,7 @@ public class Peli_cards extends Fragment {
             }
         }
 
-        //////////////////////////////////////////////////////////////////////////////
-        //poner los sesiones
-        class getSesiones extends AsyncTask<Peli, Void, Peli> {
-            @Override
-            protected Peli doInBackground(Peli... peli) {
-                //fill Database
-                StringBuffer sb;
-                Elements eTemp;
-
-                try {
-                    //parse web page
-                    Peli pTemp = peli[0];
-                    Document doc = Jsoup.connect(pTemp.getURL()).get();
-                    //get pelis
-                    Elements Title = doc.select("article section .mb10");
-                    for(Element el: Title){
-                        //cine
-                        String nombreCine = el.child(0).child(0).child(0).text();
-                        String address =  el.child(0).child(1).text();
-
-                        //data
-                        eTemp = el.getElementsByTag("li");
-                        sb = new StringBuffer();
-                        for(Element dd: el.getElementsByTag("li")){
-                            sb.append(dd.child(0).text().replace('.',' ')+" | ");
-                        }
-                        String fechas = sb.toString();
-
-                        //tiempo
-                        eTemp = el.getElementsByClass("timeTable");
-                        sb = new StringBuffer();
-                        for(Element tt: el.getElementsByClass("timeTable")){
-                            sb.append(tt.text().replace(")",")\n"));
-                        }
-                        String tiempo = sb.toString();
 
 
-                        Cine c = new Cine(nombreCine,address);
-                        base.addCine(c);
-                        base.addDate(pTemp.getTitol(),address,fechas,tiempo);
-                    }
-                    return peli[0];
-                } catch (IOException e) {
-                    return null;
-                }
-            }
-            @Override
-            protected void onPostExecute(Peli p){
-                super.onPostExecute(p);
-                ma.mostrarSesiones(p);
-            }
-        }
     }
 }

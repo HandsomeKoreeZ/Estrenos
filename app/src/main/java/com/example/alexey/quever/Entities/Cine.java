@@ -1,4 +1,4 @@
-package com.example.alexey.quever;
+package com.example.alexey.quever.Entities;
 
 public class Cine {
     private String address;

@@ -1,5 +1,10 @@
-package com.example.alexey.quever;
+package com.example.alexey.quever.Entities;
 
+
+
+/**
+ * date and time entitie that relate to movie
+ */
 public class Data {
     private String addressCine;
     private String titolPeli;
@@ -8,7 +13,7 @@ public class Data {
 
     Data(){};
 
-    Data(String ad, String ti, String dat, String time){
+    public Data(String ad, String ti, String dat, String time){
         this.addressCine = ad;
         this.titolPeli = ti;
         this.dat = dat;
